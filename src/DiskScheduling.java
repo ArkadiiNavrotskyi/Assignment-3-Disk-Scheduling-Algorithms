@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
- // Disk Scheduling Algorithm Simulator
- // This program simulates three disk scheduling algorithms: FCFS, SSTF, and SCAN
- // It runs three different cases to demonstrate the behavior of each algorithm
+// Disk Scheduling Algorithm Simulator
+// This program simulates three disk scheduling algorithms: FCFS, SSTF, and SCAN
+// It runs three different cases to demonstrate the behavior of each algorithm
 
 public class DiskScheduling {
 
@@ -39,7 +39,6 @@ public class DiskScheduling {
     }
 
     // 1. First Come First Serve (FCFS)
-    // This algorithm services requests in the order they arrive, regardless of their position on the disk
     public static void FCFS(int head, int[] reqs) {
         int totalMovement = 0;
         int currentHead = head;
@@ -53,10 +52,10 @@ public class DiskScheduling {
             System.out.print(" -> " + req);
         }
         System.out.println("\nTotal Head Movement: " + totalMovement);
+        System.out.printf("Average Seek Distance: %.2f\n", (double) totalMovement / reqs.length);
     }
 
     // 2. Shortest Seek Time First (SSTF)
-    // This algorithm selects the request that is closest to the current head position, minimizing seek time for each request
     public static void SSTF(int head, int[] reqs) {
         int totalMovement = 0;
         int currentHead = head;
@@ -85,12 +84,10 @@ public class DiskScheduling {
             System.out.print(" -> " + currentHead);
         }
         System.out.println("\nTotal Head Movement: " + totalMovement);
+        System.out.printf("Average Seek Distance: %.2f\n", (double) totalMovement / reqs.length);
     }
 
     // 3. SCAN (Elevator Algorithm)
-    // This algorithm moves the head in one direction (right or left),
-    // servicing requests until it reaches the end of the disk, then reverses
-    // direction and services remaining requests
     public static void SCAN(int head, int[] reqs, String direction) {
         int totalMovement = 0;
         int currentHead = head;
@@ -101,7 +98,7 @@ public class DiskScheduling {
         Arrays.sort(reqs);
 
         if (direction.equalsIgnoreCase("right")) {
-            // right movment
+            // right movement
             for (int req : reqs) {
                 if (req >= currentHead) {
                     totalMovement += Math.abs(currentHead - req);
@@ -138,7 +135,7 @@ public class DiskScheduling {
                 currentHead = 0;
                 System.out.print(" -> 0");
             }
-            // Вack to right
+            // Back to right
             for (int req : reqs) {
                 if (req > head) {
                     totalMovement += Math.abs(currentHead - req);
@@ -149,5 +146,6 @@ public class DiskScheduling {
         }
 
         System.out.println("\nTotal Head Movement: " + totalMovement);
+        System.out.printf("Average Seek Distance: %.2f\n", (double) totalMovement / reqs.length);
     }
 }
